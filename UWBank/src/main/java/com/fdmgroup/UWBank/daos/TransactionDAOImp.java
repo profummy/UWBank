@@ -1,4 +1,4 @@
-package com.fdmgroup.UWBank1.daos;
+package com.fdmgroup.UWBank.daos;
 
 import java.util.List;
 
@@ -8,73 +8,66 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fdmgroup.UWBank1.entities.Customer;
+import com.fdmgroup.UWBank.entities.Transaction;
 
-public class CustomerDAOImp implements CustomerDAO {
+public class TransactionDAOImp implements TransactionDAO {
 
 	@Autowired
 	private EntityManagerFactory factory;
 
-	public CustomerDAOImp() {
+	public TransactionDAOImp() {
 		super();
 	}
 
-	public CustomerDAOImp(EntityManagerFactory factory) {
+	public TransactionDAOImp(EntityManagerFactory factory) {
 		super();
 		this.factory = factory;
 	}
-
-	@Override
-	public void addCustomer(Customer c) {
-
-		EntityManager manager = factory.createEntityManager();
-		manager.getTransaction().begin();
-		manager.persist(c);
-		manager.getTransaction().commit();
-		manager.close();
-	}
-
-	@Override
-	public void removeCustomer(String username) {
-		EntityManager manager = factory.createEntityManager();
-		Customer customer = manager.find(Customer.class, username);
-		manager.getTransaction().begin();
-		manager.remove(customer);
-		manager.getTransaction().commit();
-		manager.close();
-
-	}
-
 	
-
+	
 	@Override
-	public void updateCustomer(Customer c) {
+	public void addTransaction(Transaction t) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		manager.merge(c);
+		manager.persist(t);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+
+	@Override
+	public void removeTransaction(int id) {
+		EntityManager manager = factory.createEntityManager();
+		Transaction transaction = manager.find(Transaction.class, id);
+		manager.getTransaction().begin();
+		manager.remove(transaction);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+
+	@Override
+	public void updateTransaction(Transaction t) {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(t);
 		manager.getTransaction().commit();
 		manager.close();
 
 	}
 
-
 	@Override
-	public List<Customer> getAllCustomers() {
+	public List<Transaction> getAllTransactions() {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Customer> query = manager.createQuery("select c from Customer c", Customer.class);
-		List<Customer> customerList = query.getResultList();
+		TypedQuery<Transaction> query = manager.createQuery("select t from transaction t", Transaction.class);
+		List<Transaction> transactionList = query.getResultList();
 		manager.close();
-		return customerList;
+		return transactionList;		
 	}
 
 	@Override
-	public Customer getCustomer(String username) {
-
+	public Transaction getTransaction(int id) {
 		EntityManager manager = factory.createEntityManager();
-		Customer customer = manager.find(Customer.class, username);
-		manager.close();
-
-		return customer;
+		Transaction transaction = manager.find(Transaction.class, id);
+		return transaction;
 	}
 
 }

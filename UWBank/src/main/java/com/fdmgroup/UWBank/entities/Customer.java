@@ -1,7 +1,10 @@
-package com.fdmgroup.UWBank1.entities;
+package com.fdmgroup.UWBank.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +18,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -28,9 +32,12 @@ public class Customer extends User implements Serializable {
 	private String title;
 	private String address;
 	private String phoneNumber;
+	@Transient
+	private String confirmPassword;
 	private LocalDate registrationDate;
 	@Column(name = "DATE_OF_BIRTH")
 	private LocalDate dOB;
+	@Transient
 	private String dobString;
 
 	
@@ -43,8 +50,20 @@ public class Customer extends User implements Serializable {
 
 	public void setdOB(LocalDate dOB) {
 		this.dOB = dOB;
+		
 	}
 
+	
+	
+	public String getConfirmpassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmpassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	
+	
 	public Set<Account> getAccountList() {
 		return accountList;
 	}
@@ -53,9 +72,15 @@ public class Customer extends User implements Serializable {
 		this.accountList = accountList;
 	}
 
+	
 
 	public Customer() {
+		super();
+	}
+
+	public Customer(String confirmPassword) {
 		this.registrationDate = LocalDate.now();
+		this.confirmPassword = confirmPassword;
 	}
 
 	
@@ -117,14 +142,24 @@ public class Customer extends User implements Serializable {
 	}
 
 	public void setDobString(String dobString) {
-		this.dobString = dobString;
+		System.out.println("%%%%%%%%%%%" + dobString);
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy");
+		
+		dOB = LocalDate.parse(dobString, formatter);
+				
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public String toString() {
 		return "Customer [title=" + title + ", address=" + address + ", phoneNumber=" + phoneNumber
-				+ ", registrationDate=" + registrationDate + ", dOB=" + dOB + ", dobString=" + dobString
-				+ ", accountList=" + accountList + "]";
+				+ ", confirmPassword=" + confirmPassword + ", registrationDate=" + registrationDate + ", dOB=" + dOB
+				+ ", dobString=" + dobString + ", accountList=" + accountList + "]";
 	}
 
 	

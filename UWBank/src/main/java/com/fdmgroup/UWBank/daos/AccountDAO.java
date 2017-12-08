@@ -1,8 +1,8 @@
-package com.fdmgroup.UWBank1.daos;
+package com.fdmgroup.UWBank.daos;
 
 import java.util.List;
 
-import com.fdmgroup.UWBank1.entities.Account;
+import com.fdmgroup.UWBank.entities.Account;
 
 public interface AccountDAO {
 

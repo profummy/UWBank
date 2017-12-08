@@ -1,4 +1,4 @@
-package com.fdmgroup.UWBank1.daos;
+package com.fdmgroup.UWBank.daos;
 
 import java.util.List;
 
@@ -8,66 +8,73 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fdmgroup.UWBank1.entities.Transaction;
+import com.fdmgroup.UWBank.entities.Account;
 
-public class TransactionDAOImp implements TransactionDAO {
+public class AccountDAOImp implements AccountDAO {
 
 	@Autowired
 	private EntityManagerFactory factory;
 
-	public TransactionDAOImp() {
+	public AccountDAOImp() {
 		super();
 	}
 
-	public TransactionDAOImp(EntityManagerFactory factory) {
+	public AccountDAOImp(EntityManagerFactory factory) {
 		super();
 		this.factory = factory;
 	}
-	
-	
-	@Override
-	public void addTransaction(Transaction t) {
-		EntityManager manager = factory.createEntityManager();
-		manager.getTransaction().begin();
-		manager.persist(t);
-		manager.getTransaction().commit();
-		manager.close();
-	}
 
 	@Override
-	public void removeTransaction(int id) {
-		EntityManager manager = factory.createEntityManager();
-		Transaction transaction = manager.find(Transaction.class, id);
-		manager.getTransaction().begin();
-		manager.remove(transaction);
-		manager.getTransaction().commit();
-		manager.close();
-	}
+	public void addAccount(Account a) {
 
-	@Override
-	public void updateTransaction(Transaction t) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		manager.merge(t);
+		manager.persist(a);
 		manager.getTransaction().commit();
 		manager.close();
 
 	}
 
 	@Override
-	public List<Transaction> getAllTransactions() {
+	public void removeAccount(String accountNumber) {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Transaction> query = manager.createQuery("select t from transaction t", Transaction.class);
-		List<Transaction> transactionList = query.getResultList();
+
+		manager.getTransaction().begin();
+		Account account = manager.find(Account.class, accountNumber);
+		manager.remove(account);
+		manager.getTransaction().commit();
 		manager.close();
-		return transactionList;		
+
 	}
 
 	@Override
-	public Transaction getTransaction(int id) {
+	public void updateAccount(Account a) {
+
 		EntityManager manager = factory.createEntityManager();
-		Transaction transaction = manager.find(Transaction.class, id);
-		return transaction;
+		manager.getTransaction().begin();
+		manager.merge(a);
+		manager.getTransaction().commit();
+		manager.close();
+
+	}
+
+	@Override
+	public List<Account> getAllAccounts() {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Account> query = manager.createQuery("select a from Account a", Account.class);
+		List<Account> accountList = query.getResultList();
+		manager.close();
+		return accountList;
+	}
+
+	@Override
+	public Account getAccount(String accountNumber) {
+		EntityManager manager = factory.createEntityManager();
+		Account account = manager.find(Account.class, accountNumber);
+		manager.close();
+
+		return account;
+
 	}
 
 }

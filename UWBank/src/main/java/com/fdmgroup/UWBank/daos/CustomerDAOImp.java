@@ -1,4 +1,4 @@
-package com.fdmgroup.UWBank1.daos;
+package com.fdmgroup.UWBank.daos;
 
 import java.util.List;
 
@@ -8,73 +8,73 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fdmgroup.UWBank1.entities.Account;
+import com.fdmgroup.UWBank.entities.Customer;
 
-public class AccountDAOImp implements AccountDAO {
+public class CustomerDAOImp implements CustomerDAO {
 
 	@Autowired
 	private EntityManagerFactory factory;
 
-	public AccountDAOImp() {
+	public CustomerDAOImp() {
 		super();
 	}
 
-	public AccountDAOImp(EntityManagerFactory factory) {
+	public CustomerDAOImp(EntityManagerFactory factory) {
 		super();
 		this.factory = factory;
 	}
 
 	@Override
-	public void addAccount(Account a) {
+	public void addCustomer(Customer c) {
 
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		manager.persist(a);
+		manager.persist(c);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+
+	@Override
+	public void removeCustomer(String username) {
+		EntityManager manager = factory.createEntityManager();
+		Customer customer = manager.find(Customer.class, username);
+		manager.getTransaction().begin();
+		manager.remove(customer);
 		manager.getTransaction().commit();
 		manager.close();
 
 	}
 
-	@Override
-	public void removeAccount(String accountNumber) {
-		EntityManager manager = factory.createEntityManager();
+	
 
+	@Override
+	public void updateCustomer(Customer c) {
+		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		Account account = manager.find(Account.class, accountNumber);
-		manager.remove(account);
+		manager.merge(c);
 		manager.getTransaction().commit();
 		manager.close();
 
 	}
 
+
 	@Override
-	public void updateAccount(Account a) {
-
+	public List<Customer> getAllCustomers() {
 		EntityManager manager = factory.createEntityManager();
-		manager.getTransaction().begin();
-		manager.merge(a);
-		manager.getTransaction().commit();
+		TypedQuery<Customer> query = manager.createQuery("select c from Customer c", Customer.class);
+		List<Customer> customerList = query.getResultList();
 		manager.close();
-
+		return customerList;
 	}
 
 	@Override
-	public List<Account> getAllAccounts() {
-		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Account> query = manager.createQuery("select a from Account a", Account.class);
-		List<Account> accountList = query.getResultList();
-		manager.close();
-		return accountList;
-	}
+	public Customer getCustomer(String username) {
 
-	@Override
-	public Account getAccount(String accountNumber) {
 		EntityManager manager = factory.createEntityManager();
-		Account account = manager.find(Account.class, accountNumber);
+		Customer customer = manager.find(Customer.class, username);
 		manager.close();
 
-		return account;
-
+		return customer;
 	}
 
 }

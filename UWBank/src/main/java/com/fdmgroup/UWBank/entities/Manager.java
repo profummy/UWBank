@@ -1,4 +1,4 @@
-package com.fdmgroup.UWBank1.entities;
+package com.fdmgroup.UWBank.entities;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
-package com.fdmgroup.UWBank1.daos;
+package com.fdmgroup.UWBank.daos;
 
 
-import com.fdmgroup.UWBank1.entities.Manager;
+import com.fdmgroup.UWBank.entities.Manager;
 
 
 public interface ManagerDAO {	

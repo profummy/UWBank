@@ -10,7 +10,7 @@
                             http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
        <context:component-scan
-              base-package="com.fdmgroup.UWBank1.controllers" />
+              base-package="com.fdmgroup.UWBank.controllers" />
 	<mvc:resources mapping="/css/**" location="/css/"/>
 	<mvc:annotation-driven/>
        <bean
@@ -26,11 +26,12 @@
                      <constructor-arg value="DemoPersistence"/>     
        </bean>             
        
-       <bean id="managerDAO" class="com.fdmgroup.UWBank1.daos.ManagerDAOImp"/>
-       <bean id="customerDAO" class="com.fdmgroup.UWBank1.daos.CustomerDAOImp"/>
-       <bean id="accountDAO" class="com.fdmgroup.UWBank1.daos.AccountDAOImp"/>
-       <bean id="transactionDAO" class="com.fdmgroup.UWBank1.daos.TransactionDAOImp"/>
-       
+       <bean id="managerDAO" class="com.fdmgroup.UWBank.daos.ManagerDAOImp"/>
+       <bean id="customerDAO" class="com.fdmgroup.UWBank.daos.CustomerDAOImp"/>
+       <bean id="accountDAO" class="com.fdmgroup.UWBank.daos.AccountDAOImp"/>
+       <bean id="transactionDAO" class="com.fdmgroup.UWBank.daos.TransactionDAOImp"/>
+       <bean id="userDAO" class="com.fdmgroup.UWBank.daos.UserDAOImp"/>
+       <bean id="validator" class="com.fdmgroup.UWBank.businessLogic.Validator"/>
 
 
 

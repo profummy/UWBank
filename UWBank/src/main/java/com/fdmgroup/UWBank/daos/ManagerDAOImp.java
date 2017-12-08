@@ -1,10 +1,10 @@
-package com.fdmgroup.UWBank1.daos;
+package com.fdmgroup.UWBank.daos;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fdmgroup.UWBank1.entities.Manager;
+import com.fdmgroup.UWBank.entities.Manager;
 
 public class ManagerDAOImp implements ManagerDAO {
 

@@ -1,4 +1,4 @@
-package com.fdmgroup.UWBank1.entities;
+package com.fdmgroup.UWBank.entities;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.fdmgroup.UWBank1.utilities.AccountType;
+import com.fdmgroup.UWBank.utilities.AccountType;
 
 
 @Entity 

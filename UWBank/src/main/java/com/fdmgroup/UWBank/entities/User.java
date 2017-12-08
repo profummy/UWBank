@@ -1,6 +1,7 @@
-package com.fdmgroup.UWBank1.entities;
+package com.fdmgroup.UWBank.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -18,11 +19,12 @@ public class User implements Serializable {
 	@Id
 	private String username;
 	private String password;
-	@Transient
-	private String confirmPassword;
+	
 	private String firstName;
 	private String lastName;
 	private String emailAddress;
+	private int noOfIncorrectAttempts;
+
 	
 	public User() {
 	}
@@ -73,10 +75,19 @@ public class User implements Serializable {
 		this.emailAddress = emailAddress;
 	}
 
+	
+	public int getNoOfIncorrectAttempts() {
+		return noOfIncorrectAttempts;
+	}
+
+	public void setNoOfIncorrectAttempts(int noOfIncorrectAttempts) {
+		this.noOfIncorrectAttempts = noOfIncorrectAttempts;
+	}	
+	
+	
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", confirmPassword=" + confirmPassword
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", emailAddress=" + emailAddress + "]";
+		return "User [username=" + username + ", password=" + password + ", confirmPassword=" + ", firstName=" + firstName + ", lastName=" + lastName + ", emailAddress=" + emailAddress + "]";
 	}
 
 	@Override
@@ -104,6 +115,7 @@ public class User implements Serializable {
 		return true;
 	}
 
+	
 
 	
 	

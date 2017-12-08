@@ -1,4 +1,4 @@
-package com.fdmgroup.UWBank1.entities;
+package com.fdmgroup.UWBank.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fdmgroup.UWBank1.utilities.TransactionType;
+import com.fdmgroup.UWBank.utilities.TransactionType;
 
 @Entity
 @Table(name = "UWB_TRANSACTIONS")

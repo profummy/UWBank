@@ -1,4 +1,4 @@
-package com.fdmgroup.UWBank1.utilities;
+package com.fdmgroup.UWBank.utilities;
 
 public enum AccountType {
 

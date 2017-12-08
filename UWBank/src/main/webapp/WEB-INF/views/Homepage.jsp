@@ -11,8 +11,6 @@
 </head>
 <body>
 
-	
-
 	 
 	 <form action="j_security_check" method="post" class="form-style-10">
 	 <h2>Please enter login details:</h2>
@@ -23,7 +21,7 @@
 	</form>
 	<br /> 
 
-
+<a href="register">Register for an account here</a>
 
 
 </body>
